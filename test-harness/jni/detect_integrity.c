@@ -13,6 +13,8 @@
 #include <string.h>
 #include <stdint.h>
 #include <dlfcn.h>
+#include <fcntl.h>
+#include <unistd.h>
 
 /* ARM64 trampoline patterns to scan for */
 typedef struct {

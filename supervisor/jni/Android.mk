@@ -10,6 +10,6 @@ LOCAL_SRC_FILES := supervisor_main.c \
 
 LOCAL_CFLAGS    := -Wall -Wextra -O2 -std=c17 -D_GNU_SOURCE
 LOCAL_LDFLAGS   := -pie
-LOCAL_LDLIBS    := -llog -lpthread
+LOCAL_LDLIBS    := -llog
 
 include $(BUILD_EXECUTABLE)

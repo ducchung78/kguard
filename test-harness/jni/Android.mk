@@ -19,6 +19,6 @@ LOCAL_SRC_FILES := main.c \
 
 LOCAL_CFLAGS    := -Wall -Wextra -O2 -std=c17 -DANDROID -D_GNU_SOURCE
 LOCAL_LDFLAGS   := -pie
-LOCAL_LDLIBS    := -llog -ldl
+LOCAL_LDLIBS    := -llog -ldl -lm
 
 include $(BUILD_EXECUTABLE)

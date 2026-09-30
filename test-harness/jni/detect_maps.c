@@ -9,6 +9,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdint.h>
+#include <errno.h>
 
 /* Whitelisted path prefixes — normal system library locations */
 static const char *PATH_WHITELIST[] = {
