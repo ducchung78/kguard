@@ -1,0 +1,18 @@
+# SPDX-License-Identifier: GPL-2.0
+#
+# Kbuild for kguard kernel module
+#
+
+obj-m := kguard.o
+
+kguard-objs := kguard_main.o \
+               kguard_ftrace.o \
+               kguard_pid.o \
+               kguard_filter.o \
+               kguard_procfs_maps.o \
+               kguard_procfs_mounts.o \
+               kguard_file_hide.o
+
+ccflags-y += -I$(src)/include
+ccflags-y += -Wall -Werror
+ccflags-y += -DKGUARD_VERSION=$(KGUARD_VERSION)

@@ -1,0 +1,23 @@
+#!/sbin/sh
+#################
+# Magisk / KernelSU / APatch Module Installer Script
+#################
+
+OUTFD=$2
+ZIPFILE=$3
+
+mount /data 2>/dev/null
+
+if [ -f /data/adb/magisk/util_functions.sh ]; then
+    . /data/adb/magisk/util_functions.sh
+elif [ -f /data/adb/ksu/util_functions.sh ]; then
+    . /data/adb/ksu/util_functions.sh
+elif [ -f /data/adb/ap/util_functions.sh ]; then
+    . /data/adb/ap/util_functions.sh
+else
+    echo "! Neither Magisk nor KernelSU environment found"
+    exit 1
+fi
+
+install_module
+exit 0

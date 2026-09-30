@@ -1,0 +1,40 @@
+{
+  "profiles": {
+    "banking_vn": {
+      "description": "Vietnamese Banking and Financial Apps",
+      "policy": "STRICT_ALL",
+      "packages": [
+        "com.VCB",
+        "com.vietinbank.ipay",
+        "com.bsmart",
+        "com.mbmobile",
+        "com.vnpay.bidv",
+        "com.tcb.ibank.imobile",
+        "vn.com.techcombank.bb.app",
+        "com.agribank.agribankmobile",
+        "com.tpb.mb.gprsandroid",
+        "com.sacombank.ewallet",
+        "vn.com.vib.MyVIB2",
+        "com.hdbank.mobilebanking",
+        "com.shb.smartbanking",
+        "vn.com.ocb.omc.app",
+        "com.lpb.mobilebanking",
+        "com.mservice.momotransfer",
+        "vn.zalopay.zalopay",
+        "com.vnpay.vnpayqr"
+      ]
+    },
+    "play_services": {
+      "description": "Google Play Services Attestation & DroidGuard",
+      "policy": "STRICT_ALL",
+      "packages": [
+        "com.google.android.gms",
+        "com.google.android.gms.unstable"
+      ]
+    }
+  },
+  "flags": {
+    "STRICT_ALL": 255,
+    "STANDARD": 71
+  }
+}

@@ -1,0 +1,6 @@
+id=kguard
+name=KGuard Process Isolation & Defense
+version=v1.0.0
+versionCode=100
+author=kguard-research
+description=Kernel and Runtime process isolation, namespace detachment, and syscall defense framework for RedMagic 8 Pro (SM8550).

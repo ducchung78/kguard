@@ -1,0 +1,13 @@
+# Allow zygote access to /dev/kguard character device
+allow zygote device chr_file { open read write ioctl }
+allow untrusted_app device chr_file { open read write ioctl }
+allow untrusted_app_all device chr_file { open read write ioctl }
+allow system_app device chr_file { open read write ioctl }
+
+# Allow zygote to unshare mount namespace and manipulate mounts
+allow zygote self capability { sys_admin }
+allow zygote labeledfs filesystem { unmount }
+
+# Allow supervisor daemon operations
+allow init self capability { sys_ptrace sys_admin }
+allow init domain process { ptrace }
