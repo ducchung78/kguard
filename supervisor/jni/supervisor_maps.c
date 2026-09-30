@@ -12,9 +12,10 @@
 #endif
 
 static const char *KEYWORDS[] = {
-    "magisk", "zygisk", "riru", "edxposed", "lsposed", "xposed",
+    "magisk", "zygisk", "zygisksu", "kguard", "riru", "edxposed", "lsposed", "xposed",
     "frida", "substrate", "dobby", "libgadget", "linjector",
     "keymint_soft", "triquestokeymint", "playintegrityfix", "keybox",
+    "/data/adb",
     NULL
 };
 

@@ -16,6 +16,7 @@
         "com.sacombank.ewallet",
         "vn.com.vib.MyVIB2",
         "com.hdbank.mobilebanking",
+        "com.vnpay.hdbank",
         "com.shb.smartbanking",
         "vn.com.ocb.omc.app",
         "com.lpb.mobilebanking",
@@ -30,6 +31,16 @@
       "packages": [
         "com.google.android.gms",
         "com.google.android.gms.unstable"
+      ]
+    },
+    "detector_apps": {
+      "description": "Environment Detection & RASP Test Apps",
+      "policy": "STRICT_ALL",
+      "packages": [
+        "com.eltavine.duckdetector",
+        "com.zhenxi.hunter",
+        "io.github.vvb2060.mahoshojo",
+        "com.reveny.nativehookdetector"
       ]
     }
   },

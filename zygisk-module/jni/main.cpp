@@ -28,18 +28,40 @@ public:
 
     void preAppSpecialize(zygisk::AppSpecializeArgs *args) override {
         const char *process = nullptr;
+        std::string pkg_name;
+
         if (args->nice_name) {
             process = env->GetStringUTFChars(args->nice_name, nullptr);
+            if (process) {
+                pkg_name = process;
+                // Strip process suffix if multi-process (e.g. "com.foo:service" -> "com.foo")
+                size_t colon = pkg_name.find(':');
+                if (colon != std::string::npos) {
+                    pkg_name = pkg_name.substr(0, colon);
+                }
+            }
         }
 
-        if (!process) return;
+        // Fallback: extract package name from app_data_dir (e.g. "/data/user/0/com.foo")
+        if (pkg_name.empty() && args->app_data_dir) {
+            const char *dir = env->GetStringUTFChars(args->app_data_dir, nullptr);
+            if (dir) {
+                const char *slash = strrchr(dir, '/');
+                if (slash && *(slash + 1) != '\0') {
+                    pkg_name = slash + 1;
+                }
+                env->ReleaseStringUTFChars(args->app_data_dir, dir);
+            }
+        }
+
+        if (pkg_name.empty()) return;
 
         uint32_t policy_flags = 0;
-        bool is_target = match_policy(process, policy_flags);
+        bool is_target = match_policy(pkg_name.c_str(), policy_flags);
 
         if (is_target) {
             LOGI("Target detected: %s -> applying KGuard policy flags: 0x%x",
-                 process, policy_flags);
+                 pkg_name.c_str(), policy_flags);
 
             // 1. Mount namespace isolation and cleanup
             kguard_isolate_mount_namespace(policy_flags);
