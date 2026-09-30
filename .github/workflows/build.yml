@@ -1,0 +1,55 @@
+name: Build KGuard Module
+
+on:
+  push:
+    branches: [ master, main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Android NDK
+        uses: nttld/setup-ndk@v1
+        with:
+          ndk-version: r25c
+          add-to-path: true
+
+      - name: Build Test Harness
+        run: |
+          cd test-harness
+          ndk-build NDK_PROJECT_PATH=. APP_BUILD_SCRIPT=jni/Android.mk
+          mkdir -p ../dist
+          cp libs/arm64-v8a/kguard-detect ../dist/
+
+      - name: Build Seccomp Supervisor
+        run: |
+          cd supervisor
+          ndk-build NDK_PROJECT_PATH=. APP_BUILD_SCRIPT=jni/Android.mk
+          cp libs/arm64-v8a/kguard-supervisor ../dist/
+
+      - name: Build Zygisk Module
+        run: |
+          cd zygisk-module
+          ndk-build NDK_PROJECT_PATH=. APP_BUILD_SCRIPT=jni/Android.mk
+
+      - name: Package Magisk / KernelSU Zip
+        run: |
+          python3 package.py
+
+      - name: Upload KGuard Flashable Zip
+        uses: actions/upload-artifact@v4
+        with:
+          name: KGuard-SM8550-Release
+          path: dist/KGuard-v1.0.0-SM8550.zip
+          retention-days: 14
+
+      - name: Upload Test Harness
+        uses: actions/upload-artifact@v4
+        with:
+          name: kguard-detect-binary
+          path: dist/kguard-detect
+          retention-days: 14
